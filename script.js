@@ -1,55 +1,56 @@
 /*Adicione seu codigo abaixo */
-const lista = [1,2,3,4,5,16,7,8,9]
-console.log(lista)
+const lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const param = ((iten) => {
+   return iten + 4 
+})
 
-function methodMap(list, mult){
-    let result = []
-    for(let i = 0; i < list.length; i++){
-        const mapmap = list[i] * mult
-            result.push(mapmap)
+function methodMap(array, param) {
+    const newMap = []
+    for (let i = 0; i < array.length; i++) {
+        newMap.push(param (array[i], i, array))
     }
-    return result
+    return newMap
 }
-console.log(methodMap(lista, 2))
+methodMap(lista, param)
 
-
-function methodFilter(list, param){
-    let result = []
-    for(let i = 0; i < list.length; i++){
-        let filter = list[i]
-        if(filter >= param){
-            result.push(filter) 
-        }
-    }return result
-}
-console.log(methodFilter(lista, 4))
-
-
-function methodReduce(list){
-    let contador = 0
-    for(let i = 0; i < list.length; i++){
-        let atualNumero = list[i]
-        contador += atualNumero
-    }return contador
-}
-console.log(methodReduce(lista))
-
-
-function methodFind(list, param){
-    for(let i = 0; i < list.length; i++){
-        let numeroAtual = list[i]
-        if(numeroAtual >=  param){
-            return numeroAtual
+function methodFilter(lista) {
+    const filterNumber = []
+    for (let i = 0; i < lista.length; i++) {
+        if (lista[i] === 6 ) {
+            filterNumber.push(lista[i])
         }
     }
+    return filterNumber
 }
-console.log(methodFind(lista, 10))
+methodFilter(lista)
+
+const paramReduce = ((itenInicial, itenValue) => {
+    return itenInicial + itenValue
+})
+
+function methodReduce(array, param, initialValue = 0) {
+    for (let i = 0; i < lista.length; i++) {
+        initialValue = param(initialValue, array[i])
+    }
+    return initialValue
+}
+methodReduce(lista, paramReduce)
+
+function methodFind(lista) {
+    const findNumber = []
+    for( let i = 0; i < lista.length; i++) {
+        if (lista[i] > 8) {
+            return lista[i]
+        }
+    } 
+    return findNumber
+}
+methodFind(lista)
 
 
-
-function methodIncludes(list, param){
-    for(let i = 0; i< list.length; i++){
-       let numeroAtual = list[i]
+function methodIncludes(lista, param){
+    for(let i = 0; i< lista.length; i++){
+       let numeroAtual = lista[i]
        if(numeroAtual == param){
             return true
        }
@@ -58,9 +59,9 @@ function methodIncludes(list, param){
 console.log(methodIncludes(lista, 16))
 
 
-function methodIndexof(list, param){
-    for(let i = 0; i < list.length; i++){
-        let numeroAtual = list[i]
+function methodIndexof(lista, param){
+    for(let i = 0; i < lista.length; i++){
+        let numeroAtual = lista[i]
         if(param == numeroAtual){
             return i
         }
