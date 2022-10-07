@@ -1,56 +1,80 @@
 /*Adicione seu codigo abaixo */
-const lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-const param = ((iten) => {
-   return iten + 4 
-})
+const lista = [1,5,3,4,5,16,7,8,9]
+console.log(lista)
 
-function methodMap(array, param) {
-    const newMap = []
-    for (let i = 0; i < array.length; i++) {
-        newMap.push(param (array[i], i, array))
+function methodMap(list, callBack){
+    let result = []
+    for(let i = 0; i < list.length; i++){
+        
+           result.push(callBack(list[i], i, lista))
     }
-    return newMap
+    return result
 }
-methodMap(lista, param)
+console.table(methodMap(lista, callBackMap))
 
-function methodFilter(lista) {
-    const filterNumber = []
-    for (let i = 0; i < lista.length; i++) {
-        if (lista[i] === 6 ) {
-            filterNumber.push(lista[i])
+function callBackMap(element, index, array){
+    return `Número ${element} no index ${index} veio desse array ${array}`
+
+}
+
+
+function methodFilter(list, callBack){
+    let result = []
+    for(let i = 0; i < list.length; i++){
+        if(callBack(list[i], i, list)){
+            result.push(list[i])
+        }
+    }return result
+}
+console.log(methodFilter(lista, callBackFilter))
+
+function callBackFilter(element, index, array){
+    if(element > 3 && index && array.length > 0){
+        return true
+    }
+
+}
+
+function methodReduce(list, callBack){
+    let contador = 0
+    for(let i = 0; i < list.length; i++){
+        let atualNumero = list[i]
+        contador += atualNumero
+        if(i == list.length-1){
+            return callBack(contador, 0)
         }
     }
-    return filterNumber
 }
-methodFilter(lista)
+console.log(methodReduce(lista, callBackReduce))
 
-const paramReduce = ((itenInicial, itenValue) => {
-    return itenInicial + itenValue
-})
-
-function methodReduce(array, param, initialValue = 0) {
-    for (let i = 0; i < lista.length; i++) {
-        initialValue = param(initialValue, array[i])
-    }
-    return initialValue
+function callBackReduce(acumulador, atual){
+    return acumulador + atual
 }
-methodReduce(lista, paramReduce)
 
-function methodFind(lista) {
-    const findNumber = []
-    for( let i = 0; i < lista.length; i++) {
-        if (lista[i] > 8) {
-            return lista[i]
+
+function methodFind(list, callBack, param){
+    for(let i = 0; i < list.length; i++){
+        let numeroAtual = list[i]
+        if(callBack(numeroAtual, param)){
+            return numeroAtual
         }
-    } 
-    return findNumber
+    }
 }
-methodFind(lista)
+console.log(methodFind(lista, callBackFind, 10))
 
 
-function methodIncludes(lista, param){
-    for(let i = 0; i< lista.length; i++){
-       let numeroAtual = lista[i]
+
+function callBackFind(element, param){
+    if(element >=  param){
+        return true
+    }
+
+}
+
+
+function methodIncludes(list, param){
+    for(let i = 0; i< list.length; i++){
+       let numeroAtual = list[i]
        if(numeroAtual == param){
             return true
        }
@@ -59,9 +83,9 @@ function methodIncludes(lista, param){
 console.log(methodIncludes(lista, 16))
 
 
-function methodIndexof(lista, param){
-    for(let i = 0; i < lista.length; i++){
-        let numeroAtual = lista[i]
+function methodIndexof(list, param){
+    for(let i = 0; i < list.length; i++){
+        let numeroAtual = list[i]
         if(param == numeroAtual){
             return i
         }
